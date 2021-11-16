@@ -2,10 +2,10 @@ package ui;
 
 import java.util.Scanner;
 
-public class Menu {
+public class MainMenu {
     private Scanner inputFromUser;
 
-    public Menu(){
+    public MainMenu(){
         this.inputFromUser = new Scanner(System.in);
     }
 
