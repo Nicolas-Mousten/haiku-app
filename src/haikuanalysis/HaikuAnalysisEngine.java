@@ -34,17 +34,35 @@ public class HaikuAnalysisEngine {
         String[] line3 = words.getThirdLine().split(" ");
         ArrayList<String> wordArray = new ArrayList<>();
         for (int i = 0; i < line1.length; i++) {
-            wordArray.add(line1[i]);
+            String word = "";
+            for (int j = 0; j < line1[i].length(); j++) {
+                if(!String.valueOf(line1[i].charAt(j)).equalsIgnoreCase(".") && !String.valueOf(line1[i].charAt(j)).equalsIgnoreCase("!")&& !String.valueOf(line1[i].charAt(j)).equalsIgnoreCase(",")){
+                    word += String.valueOf(line1[i].charAt(j));
+                }
+            }
+            wordArray.add(word);
         }
         for (int i = 0; i < line2.length; i++) {
-            wordArray.add(line2[i]);
+            String word = "";
+            for (int j = 0; j < line2[i].length(); j++) {
+                if(!String.valueOf(line2[i].charAt(j)).equalsIgnoreCase(".") && !String.valueOf(line2[i].charAt(j)).equalsIgnoreCase("!")&& !String.valueOf(line2[i].charAt(j)).equalsIgnoreCase(",")){
+                    word += String.valueOf(line2[i].charAt(j));
+                }
+            }
+            wordArray.add(word);
         }
         for (int i = 0; i < line3.length; i++) {
-            wordArray.add(line3[i]);
+            String word = "";
+            for (int j = 0; j < line3[i].length(); j++) {
+                if(!String.valueOf(line3[i].charAt(j)).equalsIgnoreCase(".") && !String.valueOf(line3[i].charAt(j)).equalsIgnoreCase("!")&& !String.valueOf(line3[i].charAt(j)).equalsIgnoreCase(",")){
+                    word += String.valueOf(line3[i].charAt(j));
+                }
+            }
+            wordArray.add(word);
         }
         return wordArray;
     }
-    public int syllablesCounter(ArrayList<String> words,ArrayList<Integer>indexOfVokals){
+    public int syllablesCounter(ArrayList<String> words){
         int syllables = 0;
         for (int i = 0; i < words.size(); i++) {            //Looks at one words at the time
             int vokalCount = 0;
@@ -60,14 +78,41 @@ public class HaikuAnalysisEngine {
                     }
                 }
             }
+            //---------------------------------Code Above to find 1 vokal words---------------------------------
             if(vokalCount >1) {                 //The words with more than 2 vokals is specifyed here:
-                System.out.println(words.get(i));
+                for (int j = 0; j < words.get(i).length(); j++) {
+                    String character = String.valueOf(words.get(i).charAt(j));
+                    if(!konsonants.contains(character)){
+                        String vokalLetter = character;
+                        int vokalLetterIndex = j;
+                        try {
+                            int konOneIndex = vokalLetterIndex+1;
+                            int konTwoIndex = vokalLetterIndex+2;
+                            String konOne =String.valueOf(words.get(i).charAt(konOneIndex));
+                            String konTwo =String.valueOf(words.get(i).charAt(konTwoIndex));
+                            if(!vokals.contains(konOne)){
+                                syllables++;
+                            }else if(!vokals.contains(konTwo)){
+                                syllables++;
+                            }else{
+
+                            }
+                        }catch (StringIndexOutOfBoundsException e){
+
+                        }
+                    }
+
+                }
+            }
 
 
-            }else if(vokalCount<=1){
+            //----------------------------Code Above to find how many syllables in multi vokal words.
+            else if(vokalCount<=1){
                 syllables++;
             }
         }
         return syllables;
     }
 }
+
+
